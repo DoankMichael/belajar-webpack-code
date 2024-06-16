@@ -1,7 +1,7 @@
-const cekInputValid = require('./utils/cekInputValid')
-const parseInput = require('./utils/parseInput')
+import { cekInputValid } from "./utils/cekInputValid";
+import { parseInput } from "./utils/parseInput";
 
-const run = (alertService, calculatorService, jokesService) => {
+export const run = (alertService, calculatorService, jokesService) => {
   alertService.sembunyikanError();
 
   calculatorService.onClick(() => {
@@ -12,18 +12,16 @@ const run = (alertService, calculatorService, jokesService) => {
       const [angka1, angka2] = angka;
       calculatorService.setResult(angka1, angka2);
     } else {
-      calculatorService.setResult('');
+      calculatorService.setResult("");
       alertService.tampilkanErrorPenjumlahan(input, angka);
     }
   });
 
   jokesService.onClick(() => {
-    fetch('https://candaan-api.vercel.app/api/text/random')
+    fetch("https://candaan-api.vercel.app/api/text/random")
       .then((response) => response.json())
       .then((data) => {
         jokesService.setModal(data.data);
       });
   });
 };
-
-module.exports = run;
